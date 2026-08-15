@@ -36,7 +36,7 @@ output "glue_partitions_region" {
 }
 output "glue_partitions_storage_descriptor" {
   description = "Map of storage_descriptor values across all glue_partitions, keyed the same as var.glue_partitions"
-  value       = { for k, v in aws_glue_partition.glue_partitions : k => v.storage_descriptor if v.storage_descriptor != null && length(v.storage_descriptor) > 0 }
+  value       = { for k, v in aws_glue_partition.glue_partitions : k => one(v.storage_descriptor) if v.storage_descriptor != null && length(v.storage_descriptor) > 0 }
 }
 output "glue_partitions_table_name" {
   description = "Map of table_name values across all glue_partitions, keyed the same as var.glue_partitions"
